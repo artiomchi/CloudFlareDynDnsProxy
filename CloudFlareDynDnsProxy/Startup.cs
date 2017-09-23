@@ -86,7 +86,9 @@ namespace CloudFlareDynDnsProxy
             {
                 type = "A",
                 name = hostname,
-                content = myip
+                content = myip,
+                ttl = 120,
+                proxied = false,
             });
             using (var client = new HttpClient
             {
@@ -113,7 +115,7 @@ namespace CloudFlareDynDnsProxy
                     return;
                 }
 
-                await context.Response.WriteAsync("ok");
+                await context.Response.WriteAsync("ok " + myip);
             }
         }
     }
